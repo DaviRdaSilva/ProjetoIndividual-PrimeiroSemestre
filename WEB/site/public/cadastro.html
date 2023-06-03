@@ -9,50 +9,55 @@
       <link rel="shortcut icon" href="assets/icon/favicon2.png" type="image/x-icon">
       <link rel="stylesheet" href="css/style.css">
       <script src="js/funcoes.js"></script>
-      <title> Drumer Land | Cadastro </title>
+      <title> Drumer Land | Login </title>
     </head>
 
     <body>
-  
-      <div class="header">
-        <div class="logo">
-            <a href="index.html"><img src="assets/icon/favicon2.png" alt="Logo"/></a>
-        </div>
-        <div class="navBar">
-          <a class="navOpcoes" href="index.html">Home</a>
-          <a class="navOpcoes" href="sobreMim.html">Sobre Mim</a>
-          <a class="navOpcoes" href="simulador.html">Planejamento de Espaço</a>
-          <a class="navOpcoes" href="entreEmContato.html">Entre em contato</a>
-          <a class="navOpcoes" href="login.html">Login</a>
-          <a class="navOpcoes" href="cadastro.html">Cadastro</a>
-        </div>
-      </div>
+    
+      <div class="banner_cadastro">
 
-      <div class="banner">
-
-        <p class="slogan">
-          Todo mundo tem o <span class="palavra_chave">Sonho</span> <br> 
-          de ser <span class="palavra_chave">Baterista,</span><br>
-          apenas não <span class="palavra_chave">descobriram.</span><br>
-        </p> 
-        
-        <div class="valores">
-          <div class="card A">
-            <h5 class="titulo_card">
-              Resiliencia
-            </h5>
-            <p class="texto_card">
-              A bateria e Um intrumento que tem seu começo muito complicado asfasfdsfasdf
-            </p>
+        <div class="card_cadastro">
+          <div class="formulario">
+            <div class="divisor">
+              <div class="parte_1">
+                <label for="email" class="label">
+                  <span> Nome </span>
+                </label>
+                <input type="email" id="input_nome" class="input">
+                <label for="Name" class="label">
+                  <span> Telefone </span>
+                </label>
+                <input type="text" id="input_telefone" class="input" maxlength="9" minlength="9">
+              </div>
+              <div class="parte_1">
+                <label for="email" class="label">
+                  <span> Email </span>
+                </label>
+                <input type="email" id="input_email" class="input">
+                <label for="Name" class="label">
+                  <span> Senha </span>
+                </label> 
+                <input type="password" id="input_senha" class="input" maxlength="8" minlength="8">
+              </div>
+            </div>
+            <div class="parte_btn">
+              <button class="btn_login" onclick="cadastrar()">Cadastrar</button>
+              <p class="mensagem_cadastro">Já Tem uma conta? <a href="index.html">Entre</a> agora mesmo</p>
+            </div>
           </div>
-          <div class="card B"></div>
-          <div class="card C"></div>
+        </div>
+
+        <div id="div_erros_login">
+          <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+          </div>
+        </div>
+        <div id="div_aguardar" class="loading-div">
         </div>
 
       </div>
-      <div class="footer">
-      </div>
-
     </body>
 
   </html>
@@ -63,12 +68,12 @@
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-        var nomeVar = nome_input.value;
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+        var nomeVar = input_nome.value;
+        var telefoneVar = input_telefone.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
 
-        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+        if (nomeVar == "" || emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -90,6 +95,7 @@
                 // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
                 emailServer: emailVar,
+                tellServer: telefoneVar,
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
@@ -102,7 +108,7 @@
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                 setTimeout(() => {
-                    window.location = "login.html";
+                    window.location = "index.html";
                 }, "2000")
 
                 limparFormulario();

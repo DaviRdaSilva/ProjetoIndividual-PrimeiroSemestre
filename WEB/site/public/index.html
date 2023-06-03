@@ -18,7 +18,7 @@
 
         <div class="card_login">
           <div class="formulario">
-                <label for="Name" class="label">
+                <label for="email" class="label">
                   <span> Email </span>
                 </label>
                 <input type="email" id="input_email" class="input">
@@ -27,11 +27,19 @@
                 </label>
                 <input type="password" id="input_senha" class="input" maxlength="12" minlength="8">
                 <button class="btn_login" onclick="entrar()">Entrar</button>
+                <p class="mensagem_cadastro">Não Tem uma conta? <a href="cadastro.html">Cadastre-se</a> agora mesmo</p>
           </div>
         </div>
 
       </div>
-      <div class="footer">
+      <div id="div_erros_login">
+        <div class="alerta_erro">
+          <div class="card_erro" id="cardErro">
+              <span id="mensagem_erro"></span>
+          </div>
+        </div>
+      </div>
+      <div id="div_aguardar" class="loading-div">
       </div>
 
     </body>
@@ -44,8 +52,8 @@
     function entrar() {
         aguardar();
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
@@ -79,12 +87,12 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
+                    sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "./site/home.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
