@@ -6,17 +6,17 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="shortcut icon" href="assets/icon/favicon2.png" type="image/x-icon">
+      <link rel="shortcut icon" href="../assets/icon/favicon2.png" type="image/x-icon">
       <link rel="stylesheet" href="../css/style.css">
       <script src="js/funcoes.js"></script>
-      <title> Drumer Land </title>
+      <title> Drumer Land | Planejamento de espaço </title>
     </head>
 
     <body>
   
       <div class="header">
         <div class="logo">
-            <a href="index.html"><img src="assets/icon/favicon2.png" alt="Logo"/></a>
+            <a href="index.html"><img src="../assets/icon/favicon2.png" alt="Logo"/></a>
         </div>
         <div class="navBar">
           <div class="navBar">
@@ -29,31 +29,89 @@
         </div>
       </div>
 
-      <div class="banner">
+      <div class="banner_planejamento">
 
-        <p class="slogan">
-          Todo mundo tem o <span class="palavra_chave">Sonho</span> <br> 
-          de ser <span class="palavra_chave">Baterista,</span><br>
-          apenas não <span class="palavra_chave">descobriram.</span><br>
-        </p> 
-        
-        <div class="valores">
-          <div class="card A">
-            <h5 class="titulo_card">
-              Resiliencia
-            </h5>
-            <p class="texto_card">
-              A bateria e Um intrumento que tem seu começo muito complicado asfasfdsfasdf
-            </p>
-          </div>
-          <div class="card B"></div>
-          <div class="card C"></div>
+        <div class="formulario">
+          <label for="Espaço" class="label"> Espaço Livre (em m²) </label>
+          <input type="text" id="input_espaço_livre" class="input">
+          <button class="btn_calculo" onclick="calculo_espaço()"> Mostrar Opções </button>
+          <div id="div_resultado" class="resultado"></div>
         </div>
 
+
       </div>
-      <div class="footer">
-      </div>
+
+      <footer>
+
+        <div class="navBar">
+          <a class="navOpcoes" href="home.html">Home</a>
+          <a class="navOpcoes" href="sobreMim.html">Sobre Mim</a>
+          <a class="navOpcoes" href="dashboard.html"> DashBrods </a>
+        </div>
+        <div class="logo">
+          <a href="index.html"><img src="../assets/icon/favicon2.png" alt="Logo"/></a>
+        </div>
+        <div class="navBar">
+          <a class="navOpcoes" href="simulador.html">Planejamento <br>de Espaço</a>
+          <a class="navOpcoes" href="entreEmContato.html">Entre em contato</a>
+        </div>
+
+      </footer>
 
     </body>
 
   </html>
+
+  <script>
+
+    var LISTA_OPÇÕES = [
+      {"Tambores": 3, "Pratos": 3},
+      {"Tambores": 4, "Pratos": 3},
+      {"Tambores": 5, "Pratos": 4},
+      {"Tambores": 6, "Pratos": 5},
+    ]
+
+    function calculo_espaço(){
+
+      var ESPAÇO = Number(input_espaço_livre.value);
+
+      if(ESPAÇO >= 10 && ESPAÇO < 16 ){
+
+        div_resultado.innerHTML = ` 
+          O ideal será ter uma Bateria que tenha até ${LISTA_OPÇÕES[0].Tambores} tambores e até ${LISTA_OPÇÕES[0].Pratos} Pratos<br>
+          Ela Vai ocupar de 9 a 13 m² Dependendo da organização
+        `;
+
+      }else if(ESPAÇO >= 16 && ESPAÇO < 23){
+
+        div_resultado.innerHTML = ` 
+          O ideal será ter uma Bateria que tenha até ${LISTA_OPÇÕES[1].Tambores} tambores e até ${LISTA_OPÇÕES[1].Pratos} Pratos<br>
+          Ela Vai ocupar de 15 a 20 m² Dependendo da organização
+        `;
+
+      }else if(ESPAÇO >= 23 && ESPAÇO < 28){
+
+        div_resultado.innerHTML = ` 
+          O ideal será ter uma Bateria que tenha até ${LISTA_OPÇÕES[2].Tambores} tambores e até ${LISTA_OPÇÕES[2].Pratos} Pratos<br>
+          Ela Vai ocupar de 22 a 25 m² Dependendo da organização
+        `;
+
+      }else if(ESPAÇO >= 28){
+
+        div_resultado.innerHTML = ` 
+          O ideal será ter uma Bateria que tenha ${LISTA_OPÇÕES[1].Tambores} ou mais tambores e ${LISTA_OPÇÕES[1].Pratos} ou mais Pratos<br>
+          Ela Vai ocupar 25m²
+        `;
+
+      }else{
+
+        div_resultado.innerHTML = `Este espaço e muito pequeno para uma bateria`;
+
+      }
+
+      input_espaço_livre.value = "";
+
+    }
+
+
+  </script>

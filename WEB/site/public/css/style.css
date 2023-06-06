@@ -409,6 +409,73 @@ body {
 
 /* Fim Banner PG-Sobre-Mim */
 
+/* Inicio do Banner da PG-Planejamento de Espaço */
+
+.banner_planejamento{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner_planejamento .formulario{
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 60%;
+  padding: 10px;
+  background-color: rgba(137, 43, 226, 0.564);
+  border-radius: 55px;
+}
+
+.banner_planejamento .formulario .label{
+  display: flex;
+  width: 90%;
+  height: max-content;
+  font-size: 50px;
+  color: white ;
+  border-bottom: solid 1px white;
+}
+
+.banner_planejamento .formulario .input{
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 80%;
+  height: 5vh;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.btn_calculo{
+  width: 60%;
+  margin-top: 5%;
+  height: 15%;
+  font-size: 30px;
+  border-radius: 35px;
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.btn_calculo:hover{
+  background-color: white;
+  color: black;
+}
+
+.resultado{
+  color: white;
+  font-size: 30px;
+  margin-top: 5%;
+}
+
+/* Fim do Banner da PG-Planejamento de Espaço */
+
 /* Inicio do Footer Universal */
 
 footer{
