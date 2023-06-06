@@ -37,7 +37,7 @@ body {
 
 .header .navBar{
   display: flex;
-  width: 70%;
+  width: 83%;
   margin-left: 13%;
   height: 100%;
   align-items: center;
@@ -50,6 +50,7 @@ body {
   color: blueviolet;
   font-size: 28px;
   text-decoration: none;
+  margin: 5px;
 }
 
 /* Fim Header Universal */
@@ -258,6 +259,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 20%;
 }
 
 .banner_Home .slogan{
@@ -371,13 +373,48 @@ body {
 
 /* Fim Banner PG-Home */
 
-/* Inicio do Footer*/
+/* Inicio Banner PG-Sobre-Mim */
+
+.banner_sobre_mim{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 15%;
+  margin-bottom: 10%;
+  height: fit-content;
+}
+
+.banner_sobre_mim .imagen_perfil{
+  width: 65vh;
+  margin-left: 3%;
+  height: 50vh;
+}
+
+.banner_sobre_mim .texto_perfil{
+  width: 58%;
+  height: 50vh;
+  margin-left: 1%;
+}
+
+.texto_perfil .texto {
+  width: 100%;
+  height: fit-content;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.718);
+  color: blueviolet;
+  font-size: 25px;
+  text-align: justify;
+  padding: 2%;
+}
+
+/* Fim Banner PG-Sobre-Mim */
+
+/* Inicio do Footer Universal */
 
 footer{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20%;
   width: 100%;
   height: 30vh;
   background-color: hsla(0, 0%, 0%, 0.845);
@@ -391,10 +428,6 @@ footer .logo{
 footer .navBar{
   display: flex;
   flex-direction: column;
-  /* width: 70%;
-  margin-left: 13%;
-  height: 100%;
-  gap: 15px; */
 }
 
-/* Fim do Footer*/
+/* Fim do Footer Universal */
