@@ -380,14 +380,21 @@ body {
   flex-direction: row;
   width: 100%;
   margin-top: 15%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   height: fit-content;
 }
 
 .banner_sobre_mim .imagen_perfil{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 65vh;
-  margin-left: 3%;
-  height: 50vh;
+  height: 75vh;
+}
+
+.imagen_perfil img{
+  width: 75%;
+  height: 100%;
 }
 
 .banner_sobre_mim .texto_perfil{

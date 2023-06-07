@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="css/style_perfil.css">
 
-    <script src="../js/funcoes.js"></script>
+    <script src="../../js/funcoes.js"></script>
     <script src="./alerta.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -48,8 +48,22 @@
             <label for="Name">Nome: <span id="usuario_nome2">Usuario</span></label>
             <label for="Email">Email: <span id="usuario_email">Email</span></label>
           </div>
+          <div class="graficos">
 
+            <div class="baterias">
+              <label for="Baterias">Bateria</label>
+              <ul class="ul divisa" id="ul_baterias">
+                
+              </ul>
+            </div>
+            <div class="Treinos">
+              <label for="Treinos">Treinos</label>
+              <ul class="ul" id="ul_treinos">
+                
+              </ul>
+            </div>
 
+          </div>
 
         </div>
 
@@ -70,7 +84,8 @@
         <a class="navOpcoes" href="./perfil/index.html"> Perfil </a>
         <a class="navOpcoes" href="simulador.html">Planejamento <br>de Espaço</a>
         </div>
-
+        <div id="div_aguardar" class="loading-div">
+        </div>
     </footer>
 
   </body>
@@ -91,6 +106,142 @@ usuario_email.innerHTML = sessionStorage.EMAIL_USUARIO;
         setTimeout(atualizacaoPeriodica, 5000);
     }
 
+    window.onload = atualizarFeed_Baterias();
+    window.onload = atualizarFeed_Treinos();
+
+    function atualizarFeed_Baterias() {
+        aguardar();
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch("/usuarios/listar_baterias", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                idUsuarioServer: idUsuario,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
+                if (resposta.status == 204) {
+                        var feed = document.getElementById("ul_baterias");
+                        var mensagem = document.createElement("span");
+                        mensagem.innerHTML = "Nenhum Local encontrado."
+                        feed.appendChild(mensagem);
+                        throw "Nenhum Local encontrado!!";
+                    }
+
+                    resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById
+                    ("ul_baterias");
+                    feed.innerHTML = "";
+                    for (let contador_bateria = 0; contador_bateria < resposta.length; contador_bateria++) {
+                        var publicacao_bateria = resposta[contador_bateria];
+                        // criando e manipulando elementos do HTML via JavaScript
+
+                        var Item_Bateria_modelo = document.createElement("li");
+                        Item_Bateria_modelo.innerHTML = publicacao_bateria.Modelo;
+                        feed.appendChild(Item_Bateria_modelo);
+
+                        var Item_Bateria_Marca = document.createElement("li");
+                        Item_Bateria_Marca.innerHTML = publicacao_bateria.Marca;
+                        feed.appendChild(Item_Bateria_Marca);
+
+                        var Item_Bateria_preço = document.createElement("li");
+                        Item_Bateria_preço.innerHTML = publicacao_bateria.Preço + " R$";
+                        feed.appendChild(Item_Bateria_preço);
+
+                        var Item_Bateria_Tamanho = document.createElement("li");
+                        Item_Bateria_Tamanho.innerHTML = publicacao_bateria.Tamanho + " M²";
+                        feed.appendChild(Item_Bateria_Tamanho);
+
+                        var Item_Bateria_Tipo = document.createElement("li");
+                        Item_Bateria_Tipo.innerHTML = publicacao_bateria.Tipo;
+                        feed.appendChild(Item_Bateria_Tipo);
+
+                    }
+
+                    finalizarAguardar();
+                });
+
+            } else {
+                throw ("Houve um erro ao tentar realizar A pesquisa!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function atualizarFeed_Treinos() {
+        aguardar();
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch("/usuarios/listar_Treinos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                idUsuarioServer: idUsuario,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
+                if (resposta.status == 204) {
+                        var feed = document.getElementById("ul_treinos");
+                        var mensagem = document.createElement("span");
+                        mensagem.innerHTML = "Nenhum Treino Feito"
+                        feed.appendChild(mensagem);
+                        throw "Nenhum Local encontrado!!";
+                    }
+
+                    resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById
+                    ("ul_treinos");
+                    feed.innerHTML = "";
+                    for (let contador_bateria = 0; contador_bateria < resposta.length; contador_bateria++) {
+                        var publicacao_bateria = resposta[contador_bateria];
+                        // criando e manipulando elementos do HTML via JavaScript
+
+                        var Item_Treino_Nome = document.createElement("li");
+                        Item_Treino_Nome.innerHTML = publicacao_bateria.Nome;
+                        feed.appendChild(Item_Treino_Nome);
+
+                    }
+
+                    finalizarAguardar();
+                });
+
+            } else {
+                throw ("Houve um erro ao tentar realizar A pesquisa!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
 
 </script>
 

@@ -100,4 +100,64 @@
 .informacoes label{
     padding: 5px;
     border: 2px solid blueviolet;
+    color: white;
 }
+
+.graficos{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 100%; 
+    margin: 5%;
+}
+
+.baterias{
+    width: 50%;
+    height: 100%;
+    border-right: 3px solid white;
+}
+
+.Treinos{
+    width: 50%;
+    height: 100%;
+}
+
+.ul{
+    width: 100%;
+    height: fit-content;
+    color: white;
+    font-size: 40px;
+}
+
+.baterias label{
+    width: 100%;
+    font-size: 45px;
+    margin-left: 15%;
+    padding: 5px;
+    border: 2px solid blueviolet;
+    color: white;
+}
+
+.Treinos label{
+    width: 100%;
+    font-size: 45px;
+    margin-left: 27%;
+    padding: 5px;
+    border: 2px solid blueviolet;
+    color: white;
+}
+
+/*Inicio da PG-Treino*/
+
+.card_treino{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 100%;
+    border: 3px solid rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.514);
+}
+
+
+
+/*Fim da PG-Treino*/
