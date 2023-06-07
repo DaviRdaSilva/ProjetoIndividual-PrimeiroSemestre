@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+  <html lang="PTBR">
+
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="assets/icon/favicon2.png" type="image/x-icon">
+      <link rel="stylesheet" href="../../css/style.css">
+      <link rel="stylesheet" href="./css/style_perfil.css">
+      <script src="../../js/funcoes.js"></script>
+      <title> Drumer Land | Login </title>
+    </head>
+
+    <body>
+    
+      <div class="banner_cadastro">
+
+        <div class="card_cadastro">
+          <div class="formulario">
+            <div class="divisor">
+              <div class="parte_1">
+                <label for="email" class="label">
+                  <span> Modelo </span>
+                </label>
+                <input type="email" id="input_modelo" class="input">
+                <label for="Name" class="label">
+                  <span> Marca </span>
+                </label>
+                <input type="text" id="input_marca" class="input" maxlength="11">
+              </div>
+              <div class="parte_1">
+                <label for="email" class="label">
+                  <span> Preço </span>
+                </label>
+                <input type="email" id="input_preço" class="input">
+                <label for="Name" class="label">
+                  <span> Tamanho em m²</span>
+                </label> 
+                <input type="text" id="input_tamanho" class="input" maxlength="12">
+                <label for="tipo" class="label">Tipo</label>
+                <select name="Select_Tipo" id="Select_Tipo">
+                  <option value="Acústica">Acústica</option>
+                  <option value="Eletrica">Eletrica</option>
+                </select>
+              </div>
+            </div>
+            <div class="parte_btn">
+              <button class="btn_login" onclick="cadastrar()">Cadastrar</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="div_erros_login">
+          <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+          </div>
+        </div>
+        <div id="div_aguardar" class="loading-div">
+        </div>
+
+      </div>
+    </body>
+
+  </html>
+
+<script>
+    function cadastrar() {
+        aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        
+        var modeloVar = input_modelo.value;
+        var marcaVar = input_marca.value;
+        var preçoVar = input_preço.value;
+        var tamanhoVar = input_tamanho.value;
+        var TipoVar = Select_Tipo.value;
+        var idUsuarioVar = sessionStorage.ID_USUARIO;
+
+        if (modeloVar == ""||marcaVar == ""||preçoVar == ""||tamanhoVar == ""||TipoVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar_bateria", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                ModeloServer: modeloVar,
+                marcaServer: marcaVar,
+                preçoServer: preçoVar,
+                tamanhoServer: tamanhoVar,
+                TipoServer: TipoVar,
+                idServer: idUsuarioVar, 
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "equipamentos.html";
+                }, "2000")
+
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

@@ -29,6 +29,7 @@
       <div class="navBar">
         <div class="navBar">
           <a class="navOpcoes" href="index.html">Perfil</a>
+          <a class="navOpcoes" href="Graficos.html">Graficos</a>
           <a class="navOpcoes" href="equipamentos.html">Equipamentos</a>
           <a class="navOpcoes" href="treinos.html">Treinos</a>
         </div>
@@ -184,7 +185,8 @@ usuario_email.innerHTML = sessionStorage.EMAIL_USUARIO;
         return false;
     }
 
-    function atualizarFeed_Treinos() {
+    
+function atualizarFeed_Treinos() {
         aguardar();
 
         var idUsuario = sessionStorage.ID_USUARIO;
@@ -224,7 +226,7 @@ usuario_email.innerHTML = sessionStorage.EMAIL_USUARIO;
                         // criando e manipulando elementos do HTML via JavaScript
 
                         var Item_Treino_Nome = document.createElement("li");
-                        Item_Treino_Nome.innerHTML = publicacao_bateria.Nome;
+                        Item_Treino_Nome.innerHTML = "N° " + publicacao_bateria.idRudimentos + " | " + publicacao_bateria.Nome + " | " + publicacao_bateria.Dificuldade;
                         feed.appendChild(Item_Treino_Nome);
 
                     }
@@ -242,7 +244,6 @@ usuario_email.innerHTML = sessionStorage.EMAIL_USUARIO;
 
         return false;
     }
-
 </script>
 
 </html>
